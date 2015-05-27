@@ -1,0 +1,72 @@
+buildscript {
+
+    repositories {
+        //mavenCentral()
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.0.BUILD-SNAPSHOT")
+    }
+}
+
+apply plugin: 'java'
+//apply plugin: 'org.springframework.boot.spring-boot'
+ apply plugin: 'spring-boot'
+//apply plugin: 'eclipse'
+//apply plugin: 'idea'
+
+jar {
+    baseName = 'sdr'
+    version = '0.1.0-SNAPSHOT'
+}
+// for netbeans gradle plugin to be able to debug the application
+if (!hasProperty('mainClass')) {
+    ext.mainClass = "com.csllc.Application"
+}
+
+repositories {
+    //mavenCentral()
+    jcenter()
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url "http://repo.spring.io/milestone" }
+}
+
+//compileJava {
+//     // allows java 8 reflection for method parameters, useful for spring security el
+//     options.compilerArgs=['-parameters', '-Xlint:all']
+//}
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+
+// can see what versions spring boot pulls in automatically here:
+// http://docs.spring.io/spring-boot/docs/1.2.3.RELEASE/reference/htmlsingle/#appendix-dependency-versions
+// spring-data-rest is 2.2.2 for boot 1.2.3 
+// When you declare a dependency on one of these artifacts without declaring a version, the version that is listed in the table will be used
+dependencies {
+    
+
+    compile("javax.inject:javax.inject:1") // this is not defined by spring boot
+    compile("org.apache.commons:commons-lang3:3.3.2") // this is not defined by spring boot
+    compile("commons-io:commons-io:2.4") // this is not defined by spring boot
+    compile('org.apache.httpcomponents:httpclient')
+
+    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    
+
+    compile("org.hsqldb:hsqldb")
+
+    testCompile("junit:junit")
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
