@@ -54,7 +54,6 @@ dependencies {
     compile("commons-io:commons-io:2.4") // this is not defined by spring boot
     compile('org.apache.httpcomponents:httpclient')
 
-    compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     
     compile("org.springframework.boot:spring-boot-starter-data-rest")
